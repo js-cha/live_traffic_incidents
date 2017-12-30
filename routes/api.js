@@ -1,9 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var request = require('request');
+var key = require('../apikey');
 
-/* GET users listing. */
+var api = {
+  endpoint: "https://api.transport.nsw.gov.au/v1/live/hazards/",
+  call: "incident/open"
+};
+
+var options = {
+  url: api.endpoint + api.call,
+  headers: {
+    'Authorization': 'apikey ' + key.apikey
+  }
+};
+
+/* GET live traffic data. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  request(options, function(error, response, body) {
+    res.json(body);
+  });
 });
 
 module.exports = router;
