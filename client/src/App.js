@@ -20,12 +20,9 @@ class App extends Component {
     });
   }
 
-  goToCoords(obj) {
+  goToCoords({ lat, lng }) {
     this.setState({
-      coords: {
-        lat: obj.lat,
-        lng: obj.lng
-      },
+      coords: { lat, lng },
       zoom: 13
     });
     const map = document.getElementById('google-maps');
