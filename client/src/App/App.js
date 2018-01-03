@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Card, Header, Icon } from 'semantic-ui-react';
 import Cards from '../Cards/Cards';
 import MapWithAMarker from '../GoogleMaps/GoogleMaps';
+import { fetchData } from '../utils/utils';
 import './App.css';
 
 class App extends Component {
@@ -10,15 +11,6 @@ class App extends Component {
     coords: { lat: -33.8688, lng: 151.2093 },
     zoom: 6
   };
-
-  fetchAPI() {
-    fetch('/api').then(response => response.json()).then(val => {
-      const parsed = JSON.parse(val);
-      this.setState({
-        hazards: parsed.features
-      });
-    });
-  }
 
   goToCoords({ lat, lng }) {
     this.setState({
@@ -30,7 +22,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchAPI();
+    fetchData()
+      .then(response => {
+        this.setState({
+          hazards: response.features
+        });
+      });
   }
 
   render() {

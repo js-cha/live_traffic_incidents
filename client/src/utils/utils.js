@@ -48,3 +48,12 @@ export function affectedTraffic(data) {
     </div>;
   return isNotEmpty(direction) ? <Markup /> : '';
 }
+
+export function fetchData() {
+  return fetch('/api')
+          .then(response => response.json())
+          .then(jsonString => {
+            const json = JSON.parse(jsonString);
+            return json;
+          });
+}
