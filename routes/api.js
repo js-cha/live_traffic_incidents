@@ -18,6 +18,9 @@ var options = {
 /* GET live traffic data. */
 router.get('/', function(req, res, next) {
   request(options, function(error, response, body) {
+    if (error) {
+      return console.log(error);
+    }
     res.json(body);
   });
 });
