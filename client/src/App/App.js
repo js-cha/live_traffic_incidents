@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Card, Header, Icon } from 'semantic-ui-react';
-import Cards from './Cards';
-import MapWithAMarker from './GoogleMaps';
+import Cards from '../Cards/Cards';
+import MapWithAMarker from '../GoogleMaps/GoogleMaps';
 import './App.css';
 
 class App extends Component {

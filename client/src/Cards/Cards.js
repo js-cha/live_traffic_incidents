@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import { convertUnixTime, getTimeFrame, isNotEmpty, attendingGroups, affectedTraffic } from './utils';
+import { convertUnixTime, getTimeFrame, isNotEmpty, attendingGroups, affectedTraffic } from '../utils/utils';
 
 const Cards = props => {
   const CardList = props.data.map(function(currItem, index, array) {
