@@ -68,12 +68,13 @@ export function sortData(data) {
   data.features.forEach(obj => {
     if (obj.properties.mainCategory === 'Accident') {
       hazards.accidents.push(obj);
-    }
-    if (isNotEmpty(obj.properties.start) && isNotEmpty(obj.properties.end)) {
+      return;
+    } else if (isNotEmpty(obj.properties.start) && isNotEmpty(obj.properties.end)) {
       hazards.ongoing.push(obj);
-    }
-    if (obj.properties.mainCategory !== 'Accident' && isNotEmpty(obj.properties.start) === false) {
+      return;
+    } else {
       hazards.rest.push(obj);
+      return;
     }
   })
 
