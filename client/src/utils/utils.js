@@ -57,3 +57,25 @@ export function fetchData() {
             return json;
           });
 }
+
+export function sortData(data) {
+  let hazards = {
+    accidents: [],
+    ongoing: [],
+    rest: []
+  };
+
+  data.features.forEach(obj => {
+    if (obj.properties.mainCategory === 'Accident') {
+      hazards.accidents.push(obj);
+    }
+    if (isNotEmpty(obj.properties.start) && isNotEmpty(obj.properties.end)) {
+      hazards.ongoing.push(obj);
+    }
+    if (obj.properties.mainCategory !== 'Accident' && isNotEmpty(obj.properties.start) === false) {
+      hazards.rest.push(obj);
+    }
+  })
+
+  return hazards;
+}
