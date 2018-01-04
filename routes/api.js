@@ -11,7 +11,7 @@ var api = {
 var options = {
   url: api.endpoint + api.call,
   headers: {
-    'Authorization': 'apikey ' + key.apikey
+    'Authorization': 'apikey ' + (process.env.APIKEY || key.apikey)
   }
 };
 
