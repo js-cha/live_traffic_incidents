@@ -11,3 +11,4 @@ _site/
 *.iml
 .idea/
 apikey.js
+.env
