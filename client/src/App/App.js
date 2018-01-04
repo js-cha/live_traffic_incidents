@@ -53,7 +53,7 @@ class App extends Component {
             <Card fluid id="google-maps">
               <Card.Content>
                 <MapWithAMarker
-                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp"
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwLOREvY7B0YO5OZAqBiydgaGkRavgTTI"
                   loadingElement={<div style={{ height: `100%` }} />}
                   containerElement={<div style={{ height: `600px` }} />}
                   mapElement={<div style={{ height: `100%` }} />}
