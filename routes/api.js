@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var key = require('../apikey');
 
 var api = {
   endpoint: "https://api.transport.nsw.gov.au/v1/live/hazards/",
@@ -11,7 +10,7 @@ var api = {
 var options = {
   url: api.endpoint + api.call,
   headers: {
-    'Authorization': 'apikey ' + (process.env.APIKEY || key.apikey)
+    'Authorization': 'apikey ' + process.env.APIKEY
   }
 };
 
