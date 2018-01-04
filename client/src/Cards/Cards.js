@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import { convertUnixTime, getTimeFrame, isNotEmpty, attendingGroups, affectedTraffic } from '../utils/utils';
@@ -21,34 +20,31 @@ const Cards = props => {
     };
 
     return (
-      <Card
+      <div
         key={index}
-        className={allProps.mainCategory === 'Accident' ? 'hazard-accident' : ''}
-        onClick={() => props.clickHandler(coords)}
+        className="hazards__hazard"
       >
-        <Card.Header>
+        <div>
           <strong>{roadProps.suburb}</strong>, {roadProps.mainStreet} <em>{roadProps.locationQualifier}</em>{' '}
           {roadProps.crossStreet} {isNotEmpty(roadProps.secondLocation) ? `and ${roadProps.secondLocation}` : ''}
-        </Card.Header>
-        <Card.Content className="extraPad">
-          <Card.Header content={allProps.displayName} />
-          <Card.Description>
-            {aTraffic}
-            {aGroups}
-            {ReactHtmlParser(allProps.otherAdvice)}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
+        </div>
+        <div>
+          <div>{allProps.displayName}</div>
+          {aTraffic}
+          {aGroups}
+          <div>{ReactHtmlParser(allProps.otherAdvice)}</div>
+        </div>
+        <div>
           {timeframe}
-        </Card.Content>
-      </Card>
+        </div>
+      </div>
     );
   });
 
   return (
-    <Card.Group itemsPerRow={2} stackable>
+    <div className="hazards">
       {CardList}
-    </Card.Group>
+    </div>
   );
 };
 
