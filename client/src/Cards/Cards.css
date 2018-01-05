@@ -1,0 +1,76 @@
+.cards_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cards {
+  width: calc(33% - 10px);
+}
+
+.card {
+  margin: 15px 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  border-radius: 5px;
+}
+
+.card__inner {
+  padding: 20px 10px;
+}
+
+.card__title {
+  margin-bottom: 10px;
+}
+
+.cards__title::before {
+  margin-right: 10px;
+  font-size: larger;
+}
+
+.card__description {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card__otherinfo {
+  margin-top: 10px;
+}
+
+.card__misc {
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  font-size: 12px;
+  color: #777777;
+}
+
+.card__misc__clickhandler {
+  float: right;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.accidents .cards__title::before {
+  content: "\2757";
+}
+
+.accidents .card {
+  border-right: 8px solid #e2506b;
+}
+
+.hazards .cards__title::before {
+  content: "\26A0";
+}
+
+.hazards .card {
+  border-right: 8px solid #e87437;
+}
+
+.ongoing .cards__title::before {
+  content: "\1F551";
+}
+
+.ongoing .card {
+  border-right: 8px solid #519fbd;
+}
