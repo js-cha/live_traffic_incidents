@@ -57,7 +57,8 @@ const Cards = props => {
 
 Cards.propTypes = {
   data: PropTypes.array,
-  title: PropTypes.string
+  loaded: PropTypes.bool,
+  clickHandler: PropTypes.func
 };
 
 export default Cards;
