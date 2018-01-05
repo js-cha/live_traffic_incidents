@@ -47,6 +47,16 @@ class App extends Component {
     const date = new Date().toLocaleString('en-AU', options);
     const { accidents, ongoing, rest } = this.state.hazards;
     const combined = [].concat(accidents, ongoing, rest);
+    const CardsGroup = [
+      {title: "Accidents", obj: accidents},
+      {title: "Hazards", obj: rest},
+      {title: "Ongoing", obj: ongoing}
+    ].map((val, index) => (
+      <div key={index} className={`cards ${val.title.toLowerCase()}`}>
+        <h2 className="cards__title">{`${val.title} (${val.obj.length})`}</h2>
+        <Cards loaded={this.state.dataLoaded} data={val.obj} clickHandler={this.goToCoords.bind(this)} />
+      </div>
+    ));
 
     return (
       <div>
@@ -61,18 +71,7 @@ class App extends Component {
             <section>
               <article>
                 <div className="cards_container">
-                  <div className="cards accidents">
-                    <h2 className="cards__title">Accidents ({accidents.length})</h2>
-                    <Cards loaded={this.state.dataLoaded} data={accidents} clickHandler={this.goToCoords.bind(this)} />
-                  </div>
-                  <div className="cards hazards">
-                    <h2 className="cards__title">Hazards ({rest.length})</h2>
-                    <Cards loaded={this.state.dataLoaded} data={rest} clickHandler={this.goToCoords.bind(this)} />
-                  </div>
-                  <div className="cards ongoing">
-                    <h2 className="cards__title">Ongoing ({ongoing.length})</h2>
-                    <Cards loaded={this.state.dataLoaded} data={ongoing} clickHandler={this.goToCoords.bind(this)} />
-                  </div>
+                  {CardsGroup}
                 </div>
               </article>
               <article>
