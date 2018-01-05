@@ -1,40 +1,64 @@
+html {
+  line-height: 1.25;
+}
+
 body {
-  background-color: #fbfbfb;
-}
-
-.ui.header {
-  padding: 0.5em 0;
-}
-
-.ui.card > .header {
-  padding: 10px;
-  background-color: #eaeaea;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
   color: #5a5a5a;
+  background-color: #f5f5f5;
 }
 
-.ui.card > .content.extraPad {
-  padding: 1.5em;
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.ui.card.hazard-accident > .header {
-  background: #e45757;
+
+header {
+  background-color: #3e6aaf;
+  padding: 20px 0;
+  margin-bottom: 20px;
   color: #fff;
 }
 
-.ui.card.hazard-accident > .header::before {
-  content: "\f06a ";
-  font-family: 'Icons';
+header > .container > h1 {
+  margin: 0;
+  margin-bottom: 10px;
 }
 
-.ui.card > .content > .header {
-  padding: 5px 0;
+#google-maps {
+  background-color: #ffffff;
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  border-radius: 5px;
 }
 
-.hazard-location {
-  font-size: 16px;
-  margin-bottom: 1.5em;
+@media (min-width: 560px) {
+  header > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  header > .container > h1 {
+    margin-bottom: 0;
+  }
 }
 
-.other-information {
-  margin: 0.5em 0;
+@media (max-width: 768px) {
+  #google-maps,
+  .card__misc__clickhandler {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .cards {
+    width: 100%;
+  }
 }

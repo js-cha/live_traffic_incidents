@@ -31,7 +31,7 @@ export function attendingGroups(attGroups) {
     }
   });
   const Markup = () =>
-    <div className="other-information">
+    <div className="card__otherinfo">
       Attending groups: {groups.join(', ')}
     </div>;
   return groups.length > 0 ? <Markup /> : '';
@@ -43,10 +43,10 @@ export function affectedTraffic(data) {
     direction = data.impactedLanes[0].affectedDirection;
   }
   const Markup = () =>
-    <div className="other-information">
+    <div className="card__otherinfo">
       Affected direction: {direction}
     </div>;
-  return isNotEmpty(direction) ? <Markup /> : '';
+  return isNotEmpty(direction) === true ? <Markup /> : '';
 }
 
 export function fetchData() {
@@ -56,4 +56,25 @@ export function fetchData() {
             const json = JSON.parse(jsonString);
             return json;
           });
+}
+
+export function sortData(data) {
+  let hazards = {
+    accidents: [],
+    ongoing: [],
+    rest: []
+  };
+
+  data.features.map(obj => {
+    if (obj.properties.mainCategory === 'Accident') {
+      hazards.accidents.push(obj);
+    } else if (isNotEmpty(obj.properties.start) && isNotEmpty(obj.properties.end)) {
+      hazards.ongoing.push(obj);
+    } else {
+      hazards.rest.push(obj);
+    }
+    return false;
+  });
+
+  return hazards;
 }

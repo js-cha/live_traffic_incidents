@@ -1,59 +1,63 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
+import ContentLoader from 'react-content-loader'
 import { convertUnixTime, getTimeFrame, isNotEmpty, attendingGroups, affectedTraffic } from '../utils/utils';
+import './Cards.css'
+
+const MyLoader = () => <ContentLoader type="facebook" />
 
 const Cards = props => {
+  if (props.data.length < 1) {
+    return <MyLoader />
+  }
+
   const CardList = props.data.map(function(currItem, index, array) {
-    /*
-    ** A lot of data transformation and checking for empty values.
-    */
     const allProps = currItem.properties;
     const roadProps = allProps.roads[0];
     const startedAt = `Started today at: ${convertUnixTime(allProps.created).toLocaleTimeString('en-US')}`;
     const timeframe = getTimeFrame(allProps.start, allProps.end) || startedAt;
     const aGroups = attendingGroups(allProps.attendingGroups);
     const aTraffic = affectedTraffic(roadProps);
+    const OtherAdvice = () => <div className="hazard__otherinfo">{ReactHtmlParser(allProps.otherAdvice)}</div>
     const coords = {
       lat: currItem.geometry.coordinates[1],
       lng: currItem.geometry.coordinates[0]
     };
 
     return (
-      <Card
+      <div
         key={index}
-        className={allProps.mainCategory === 'Accident' ? 'hazard-accident' : ''}
-        onClick={() => props.clickHandler(coords)}
+        className="card"
       >
-        <Card.Header>
-          <strong>{roadProps.suburb}</strong>, {roadProps.mainStreet} <em>{roadProps.locationQualifier}</em>{' '}
-          {roadProps.crossStreet} {isNotEmpty(roadProps.secondLocation) ? `and ${roadProps.secondLocation}` : ''}
-        </Card.Header>
-        <Card.Content className="extraPad">
-          <Card.Header content={allProps.displayName} />
-          <Card.Description>
+        <div className="card__inner">
+          <div className="card__title">
+            <strong>{roadProps.suburb}</strong>, {roadProps.mainStreet} <em>{roadProps.locationQualifier}</em>{' '}
+            {roadProps.crossStreet} {isNotEmpty(roadProps.secondLocation) ? `and ${roadProps.secondLocation}` : ''}
+          </div>
+          <div className="card__information">
+            <div className="card__description">{allProps.displayName}</div>
             {aTraffic}
             {aGroups}
-            {ReactHtmlParser(allProps.otherAdvice)}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
+            {isNotEmpty(allProps.otherAdvice) ? <OtherAdvice /> : ''}
+          </div>
+        </div>
+        <div className="card__misc">
           {timeframe}
-        </Card.Content>
-      </Card>
+          <div className="card__misc__clickhandler" onClick={() => props.clickHandler(coords)}>
+            View on map
+          </div>
+        </div>
+      </div>
     );
   });
 
-  return (
-    <Card.Group itemsPerRow={2} stackable>
-      {CardList}
-    </Card.Group>
-  );
+  return [...CardList];
 };
 
 Cards.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  title: PropTypes.string
 };
 
 export default Cards;
