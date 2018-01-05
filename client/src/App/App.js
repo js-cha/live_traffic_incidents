@@ -12,6 +12,7 @@ class App extends Component {
       ongoing: [],
       rest: []
     },
+    dataLoaded: false,
     coords: { lat: -33.8688, lng: 151.2093 },
     zoom: 6
   };
@@ -30,7 +31,8 @@ class App extends Component {
       .then(response => {
         const filtered = sortData(response);
         this.setState({
-          hazards: filtered
+          hazards: filtered,
+          dataLoaded: true
         });
       });
   }
@@ -61,15 +63,15 @@ class App extends Component {
                 <div className="cards_container">
                   <div className="cards accidents">
                     <h2 className="cards__title">Accidents ({accidents.length})</h2>
-                    <Cards data={accidents} clickHandler={this.goToCoords.bind(this)} />
+                    <Cards loaded={this.state.dataLoaded} data={accidents} clickHandler={this.goToCoords.bind(this)} />
                   </div>
                   <div className="cards hazards">
                     <h2 className="cards__title">Hazards ({rest.length})</h2>
-                    <Cards data={rest} clickHandler={this.goToCoords.bind(this)} />
+                    <Cards loaded={this.state.dataLoaded} data={rest} clickHandler={this.goToCoords.bind(this)} />
                   </div>
                   <div className="cards ongoing">
                     <h2 className="cards__title">Ongoing ({ongoing.length})</h2>
-                    <Cards data={ongoing} clickHandler={this.goToCoords.bind(this)} />
+                    <Cards loaded={this.state.dataLoaded} data={ongoing} clickHandler={this.goToCoords.bind(this)} />
                   </div>
                 </div>
               </article>

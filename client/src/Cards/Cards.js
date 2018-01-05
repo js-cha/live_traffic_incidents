@@ -8,7 +8,7 @@ import './Cards.css'
 const MyLoader = () => <ContentLoader type="facebook" />
 
 const Cards = props => {
-  if (props.data.length < 1) {
+  if (props.loaded === false) {
     return <MyLoader />
   }
 
