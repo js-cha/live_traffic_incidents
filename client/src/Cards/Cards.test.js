@@ -35,17 +35,25 @@ const mockProps = [
 ];
 
 describe('Test suite for Cards', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(<Cards data={mockProps} />);
-  })
-
-  it('should render cards group', () => {
-    expect(wrapper.find('.cards').hasClass('stackable')).toEqual(true);
+  it('should render cards', () => {
+    const wrapper = mount(<Cards data={mockProps} />);
+    expect(wrapper.find('.card').length).toEqual(1);
   });
 
-  it('should render the same number of cards as props array length', () => {
+  it('should render the same number of cards as data array length', () => {
+    const wrapper = mount(<Cards data={mockProps} />);
     expect(wrapper.find('.card').length).toEqual(mockProps.length);
+  });
+
+  it('should load content loader when waiting for data', () => {
+    const wrapper = mount(<Cards loaded={false}  />);
+    expect(wrapper.find('svg').length).toEqual(1);
+  });
+
+  it('should load content after receiving data', () => {
+    const wrapper = mount(<Cards loaded={false}  />);
+    expect(wrapper.find('.card').length).toEqual(0);
+    wrapper.setProps({data: mockProps, loaded: true});
+    expect(wrapper.find('.card').length).toEqual(1);
   });
 });
