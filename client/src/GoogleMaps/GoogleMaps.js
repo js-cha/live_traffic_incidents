@@ -18,7 +18,7 @@ const MapWithAMarker = withScriptjs(
               lng: incident.geometry.coordinates[0]
             }}
           />
-        )};
+        )}
       </GoogleMap>
     );
   })
