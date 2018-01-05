@@ -27,14 +27,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchData()
-      .then(response => {
-        const filtered = sortData(response);
-        this.setState({
-          hazards: filtered,
-          dataLoaded: true
-        });
+    fetchData().then(response => {
+      const filtered = sortData(response);
+      this.setState({
+        hazards: filtered,
+        dataLoaded: true
       });
+    });
   }
 
   render() {
@@ -48,15 +47,15 @@ class App extends Component {
     const { accidents, ongoing, rest } = this.state.hazards;
     const combined = [].concat(accidents, ongoing, rest);
     const CardsGroup = [
-      {title: "Accidents", obj: accidents},
-      {title: "Hazards", obj: rest},
-      {title: "Ongoing", obj: ongoing}
-    ].map((val, index) => (
+      { title: 'Accidents', obj: accidents },
+      { title: 'Hazards', obj: rest },
+      { title: 'Ongoing', obj: ongoing }
+    ].map((val, index) =>
       <div key={index} className={`cards ${val.title.toLowerCase()}`}>
         <h2 className="cards__title">{`${val.title} (${val.obj.length})`}</h2>
         <Cards loaded={this.state.dataLoaded} data={val.obj} clickHandler={this.goToCoords.bind(this)} />
       </div>
-    ));
+    );
 
     return (
       <div>
@@ -92,8 +91,7 @@ class App extends Component {
             </section>
           </div>
         </main>
-        <footer>
-        </footer>
+        <footer />
       </div>
     );
   }

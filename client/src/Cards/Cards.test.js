@@ -6,23 +6,23 @@ const mockProps = [
   {
     id: 1,
     properties: {
-      displayName: "ACCIDENT Car",
+      displayName: 'ACCIDENT Car',
       created: 1514986098977,
       start: null,
       end: null,
-      attendingGroups: ["Emergency service(s)"],
-      mainCategory: "Accident",
-      otherAdvice: " ",
+      attendingGroups: ['Emergency service(s)'],
+      mainCategory: 'Accident',
+      otherAdvice: ' ',
       roads: [
         {
-          mainStreet: "York Road",
-          crossStreet: "Syd Einfeld Drive",
-          suburb: "Bondi Junction",
-          locationQualifier: "at",
-          secondLocation: " ",
+          mainStreet: 'York Road',
+          crossStreet: 'Syd Einfeld Drive',
+          suburb: 'Bondi Junction',
+          locationQualifier: 'at',
+          secondLocation: ' ',
           impactedLanes: [
             {
-              affectedDirection: "Both directions"
+              affectedDirection: 'Both directions'
             }
           ]
         }
@@ -46,14 +46,14 @@ describe('Test suite for Cards', () => {
   });
 
   it('should load content loader when waiting for data', () => {
-    const wrapper = mount(<Cards loaded={false}  />);
+    const wrapper = mount(<Cards loaded={false} />);
     expect(wrapper.find('svg').length).toEqual(1);
   });
 
   it('should load content after receiving data', () => {
-    const wrapper = mount(<Cards loaded={false}  />);
+    const wrapper = mount(<Cards loaded={false} />);
     expect(wrapper.find('.card').length).toEqual(0);
-    wrapper.setProps({data: mockProps, loaded: true});
+    wrapper.setProps({ data: mockProps, loaded: true });
     expect(wrapper.find('.card').length).toEqual(1);
   });
 });

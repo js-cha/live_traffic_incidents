@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
 import { convertUnixTime, getTimeFrame, isNotEmpty, attendingGroups, affectedTraffic } from '../utils/utils';
-import './Cards.css'
+import './Cards.css';
 
-const MyLoader = () => <ContentLoader type="facebook" />
+const MyLoader = () => <ContentLoader type="facebook" />;
 
 const Cards = props => {
   if (props.loaded === false) {
-    return <MyLoader />
+    return <MyLoader />;
   }
 
   const CardList = props.data.map(function(currItem, index, array) {
@@ -19,24 +19,26 @@ const Cards = props => {
     const timeframe = getTimeFrame(allProps.start, allProps.end) || startedAt;
     const aGroups = attendingGroups(allProps.attendingGroups);
     const aTraffic = affectedTraffic(roadProps);
-    const OtherAdvice = () => <div className="hazard__otherinfo">{ReactHtmlParser(allProps.otherAdvice)}</div>
+    const OtherAdvice = () =>
+      <div className="hazard__otherinfo">
+        {ReactHtmlParser(allProps.otherAdvice)}
+      </div>;
     const coords = {
       lat: currItem.geometry.coordinates[1],
       lng: currItem.geometry.coordinates[0]
     };
 
     return (
-      <div
-        key={index}
-        className="card"
-      >
+      <div key={index} className="card">
         <div className="card__inner">
           <div className="card__title">
             <strong>{roadProps.suburb}</strong>, {roadProps.mainStreet} <em>{roadProps.locationQualifier}</em>{' '}
             {roadProps.crossStreet} {isNotEmpty(roadProps.secondLocation) ? `and ${roadProps.secondLocation}` : ''}
           </div>
           <div className="card__information">
-            <div className="card__description">{allProps.displayName}</div>
+            <div className="card__description">
+              {allProps.displayName}
+            </div>
             {aTraffic}
             {aGroups}
             {isNotEmpty(allProps.otherAdvice) ? <OtherAdvice /> : ''}
